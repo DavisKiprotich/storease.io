@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storease Legal</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1B2A41;
+            background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
+            min-height: 100vh;
+        }
+        html[data-lang="ar"] body {
+            direction: rtl;
+            font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+        }
+        html[data-lang="zh"] body {
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+        }
+        .top-bar {
+            background: linear-gradient(135deg, #0F4C81 0%, #1463A5 100%);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 8px 24px rgba(15, 76, 129, 0.18);
+        }
+        .brand {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+        .lang-switcher {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            padding: 6px 11px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: #FFFFFF;
+            color: #0F4C81;
+        }
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 34px 20px 72px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .badge {
+            display: inline-block;
+            background: #E7F1FB;
+            color: #0F4C81;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 7px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h1 {
+            font-size: 34px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            color: #14213D;
+        }
+        .subtitle {
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 15px;
+            color: #4D5B73;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+        .card {
+            display: block;
+            text-decoration: none;
+            background: #FFFFFF;
+            border: 1px solid #DDE7F2;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(20, 33, 61, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(20, 33, 61, 0.10);
+            border-color: #A9C7E6;
+        }
+        .card-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #0F4C81;
+            background: #EDF5FD;
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .card h2 {
+            font-size: 22px;
+            color: #14213D;
+            margin-bottom: 8px;
+        }
+        .card p {
+            color: #5B667A;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+        .card strong {
+            color: #0F4C81;
+            font-size: 14px;
+        }
+        .note {
+            margin-top: 28px;
+            background: #F7FBFF;
+            border: 1px solid #D8E8F8;
+            border-radius: 16px;
+            padding: 18px 20px;
+            color: #516173;
+            font-size: 14px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            color: #7B8798;
+            font-size: 13px;
+        }
+        @media (max-width: 700px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px 16px;
+            }
+            .brand {
+                text-align: center;
+            }
+            .lang-switcher {
+                justify-content: center;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .container {
+                padding: 26px 16px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a class="brand" href="./index.html">Storease Legal</a>
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang-btn="en" onclick="switchLang('en')">EN</button>
+            <button class="lang-btn" data-lang-btn="fr" onclick="switchLang('fr')">FR</button>
+            <button class="lang-btn" data-lang-btn="es" onclick="switchLang('es')">ES</button>
+            <button class="lang-btn" data-lang-btn="pt" onclick="switchLang('pt')">PT</button>
+            <button class="lang-btn" data-lang-btn="ar" onclick="switchLang('ar')">عربي</button>
+            <button class="lang-btn" data-lang-btn="zh" onclick="switchLang('zh')">中文</button>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="hero">
+            <span class="badge" id="hero-badge"></span>
+            <h1 id="hero-title"></h1>
+            <p class="subtitle" id="hero-subtitle"></p>
+        </section>
+
+        <section class="grid">
+            <a class="card" id="terms-card" href="./terms/?lang=en">
+                <span class="card-label" id="terms-label"></span>
+                <h2 id="terms-title"></h2>
+                <p id="terms-text"></p>
+                <strong id="terms-cta"></strong>
+            </a>
+            <a class="card" id="privacy-card" href="./privacy/?lang=en">
+                <span class="card-label" id="privacy-label"></span>
+                <h2 id="privacy-title"></h2>
+                <p id="privacy-text"></p>
+                <strong id="privacy-cta"></strong>
+            </a>
+        </section>
+
+        <section class="note" id="note-text"></section>
+
+        <footer class="footer" id="footer-text"></footer>
+    </main>
+
+    <script>
+        const copy = {
+            en: {
+                badge: 'Storease legal',
+                title: 'Terms and privacy documents',
+                subtitle: 'Open the legal pages that explain how Storease works, how subscriptions are handled, and how business data is collected, stored, and protected.',
+                termsLabel: 'Terms',
+                termsTitle: 'Terms of Service',
+                termsText: 'Read the rules for using Storease, account responsibilities, subscriptions, acceptable use, and service availability.',
+                termsCta: 'Open Terms of Service →',
+                privacyLabel: 'Privacy',
+                privacyTitle: 'Privacy Policy',
+                privacyText: 'Review what Storease collects, why it is used, which providers support the app, and what choices users have.',
+                privacyCta: 'Open Privacy Policy →',
+                note: 'These documents are written to match the current Storease product structure, including Supabase-backed business data, RevenueCat subscription handling, Google sign-in, and local exports saved on the device.',
+                footer: 'Storease legal center'
+            },
+            fr: {
+                badge: 'Juridique Storease',
+                title: 'Documents juridiques et de confidentialite',
+                subtitle: 'Ouvrez les pages juridiques qui expliquent le fonctionnement de Storease, la gestion des abonnements et la facon dont les donnees commerciales sont collecte es, stockees et protegees.',
+                termsLabel: 'Conditions',
+                termsTitle: "Conditions d'utilisation",
+                termsText: "Lisez les regles d'utilisation de Storease, les responsabilites du compte, les abonnements, l'usage autorise et la disponibilite du service.",
+                termsCta: "Ouvrir les conditions d'utilisation →",
+                privacyLabel: 'Confidentialite',
+                privacyTitle: 'Politique de confidentialite',
+                privacyText: 'Consultez les donnees collecte es par Storease, leur utilisation, les fournisseurs relies et les choix offerts aux utilisateurs.',
+                privacyCta: 'Ouvrir la politique de confidentialite →',
+                note: 'Ces documents suivent la structure actuelle de Storease, y compris les donnees commerciales stockees via Supabase, la gestion des abonnements avec RevenueCat, la connexion Google et les exports locaux enregistres sur l appareil.',
+                footer: 'Centre juridique Storease'
+            },
+            es: {
+                badge: 'Legal Storease',
+                title: 'Documentos legales y de privacidad',
+                subtitle: 'Abre las paginas legales que explican como funciona Storease, como se gestionan las suscripciones y como se recopilan, guardan y protegen los datos del negocio.',
+                termsLabel: 'Terminos',
+                termsTitle: 'Terminos de servicio',
+                termsText: 'Lee las reglas de uso de Storease, las responsabilidades de la cuenta, las suscripciones, el uso permitido y la disponibilidad del servicio.',
+                termsCta: 'Abrir Terminos de servicio →',
+                privacyLabel: 'Privacidad',
+                privacyTitle: 'Politica de privacidad',
+                privacyText: 'Revisa que datos recoge Storease, por que se usan, que proveedores apoyan la app y que opciones tienen los usuarios.',
+                privacyCta: 'Abrir Politica de privacidad →',
+                note: 'Estos documentos siguen la estructura actual de Storease, incluidos los datos comerciales guardados con Supabase, la gestion de suscripciones con RevenueCat, el inicio de sesion con Google y las exportaciones locales guardadas en el dispositivo.',
+                footer: 'Centro legal de Storease'
+            },
+            pt: {
+                badge: 'Legal Storease',
+                title: 'Documentos legais e de privacidade',
+                subtitle: 'Abra as paginas legais que explicam como a Storease funciona, como as assinaturas sao tratadas e como os dados do negocio sao coletados, armazenados e protegidos.',
+                termsLabel: 'Termos',
+                termsTitle: 'Termos de servico',
+                termsText: 'Leia as regras de uso da Storease, as responsabilidades da conta, as assinaturas, o uso permitido e a disponibilidade do servico.',
+                termsCta: 'Abrir Termos de servico →',
+                privacyLabel: 'Privacidade',
+                privacyTitle: 'Politica de privacidade',
+                privacyText: 'Veja quais dados a Storease coleta, por que eles sao usados, quais provedores apoiam o app e quais escolhas os usuarios possuem.',
+                privacyCta: 'Abrir Politica de privacidade →',
+                note: 'Estes documentos acompanham a estrutura atual da Storease, incluindo dados comerciais no Supabase, gestao de assinaturas com RevenueCat, acesso com Google e exportacoes locais salvas no dispositivo.',
+                footer: 'Centro legal da Storease'
+            },
+            ar: {
+                badge: 'الجوانب القانونية في Storease',
+                title: 'مستندات الشروط والخصوصية',
+                subtitle: 'افتح الصفحات القانونية التي تشرح طريقة عمل Storease وكيف تتم إدارة الاشتراكات وكيف يتم جمع بيانات المتجر وتخزينها وحمايتها.',
+                termsLabel: 'الشروط',
+                termsTitle: 'شروط الخدمة',
+                termsText: 'اقرأ قواعد استخدام Storease ومسؤوليات الحساب والاشتراكات والاستخدام المسموح وتوفر الخدمة.',
+                termsCta: 'افتح شروط الخدمة ←',
+                privacyLabel: 'الخصوصية',
+                privacyTitle: 'سياسة الخصوصية',
+                privacyText: 'راجع البيانات التي تجمعها Storease وسبب استخدامها والجهات التي تدعم التطبيق والخيارات المتاحة للمستخدم.',
+                privacyCta: 'افتح سياسة الخصوصية ←',
+                note: 'تمت كتابة هذه المستندات بما يتوافق مع البنية الحالية لتطبيق Storease، بما في ذلك بيانات المتجر المحفوظة عبر Supabase وإدارة الاشتراكات بواسطة RevenueCat وتسجيل الدخول عبر Google وملفات التصدير المحلية المحفوظة على الجهاز.',
+                footer: 'مركز Storease القانوني'
+            },
+            zh: {
+                badge: 'Storease 法律中心',
+                title: '条款与隐私文件',
+                subtitle: '打开法律页面，了解 Storease 如何运行、如何处理订阅，以及如何收集、存储和保护门店业务数据。',
+                termsLabel: '条款',
+                termsTitle: '服务条款',
+                termsText: '阅读 Storease 的使用规则、账户责任、订阅安排、允许的使用方式以及服务可用性说明。',
+                termsCta: '打开服务条款 →',
+                privacyLabel: '隐私',
+                privacyTitle: '隐私政策',
+                privacyText: '查看 Storease 收集哪些数据、为何使用这些数据、哪些服务商支持本应用，以及用户拥有哪些选择。',
+                privacyCta: '打开隐私政策 →',
+                note: '这些文件按照当前的 Storease 产品结构编写，包括通过 Supabase 保存的业务数据、RevenueCat 订阅处理、Google 登录，以及保存在设备上的本地导出文件。',
+                footer: 'Storease 法律中心'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function getLanguageFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const lang = (params.get('lang') || 'en').toLowerCase();
+            return copy[lang] ? lang : 'en';
+        }
+
+        function updateButtons() {
+            document.querySelectorAll('[data-lang-btn]').forEach((button) => {
+                button.classList.toggle('active', button.getAttribute('data-lang-btn') === currentLang);
+            });
+        }
+
+        function render() {
+            const text = copy[currentLang];
+            document.documentElement.lang = currentLang;
+            document.documentElement.setAttribute('data-lang', currentLang);
+
+            document.getElementById('hero-badge').textContent = text.badge;
+            document.getElementById('hero-title').textContent = text.title;
+            document.getElementById('hero-subtitle').textContent = text.subtitle;
+            document.getElementById('terms-label').textContent = text.termsLabel;
+            document.getElementById('terms-title').textContent = text.termsTitle;
+            document.getElementById('terms-text').textContent = text.termsText;
+            document.getElementById('terms-cta').textContent = text.termsCta;
+            document.getElementById('privacy-label').textContent = text.privacyLabel;
+            document.getElementById('privacy-title').textContent = text.privacyTitle;
+            document.getElementById('privacy-text').textContent = text.privacyText;
+            document.getElementById('privacy-cta').textContent = text.privacyCta;
+            document.getElementById('note-text').textContent = text.note;
+            document.getElementById('footer-text').textContent = text.footer;
+
+            document.getElementById('terms-card').href = `./terms/?lang=${currentLang}`;
+            document.getElementById('privacy-card').href = `./privacy/?lang=${currentLang}`;
+            updateButtons();
+        }
+
+        function switchLang(lang) {
+            currentLang = copy[lang] ? lang : 'en';
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', currentLang);
+            window.history.replaceState({}, '', url);
+            render();
+        }
+
+        currentLang = getLanguageFromUrl();
+        render();
+    </script>
+</body>
+</html>
